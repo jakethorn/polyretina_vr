@@ -20,7 +20,7 @@ MonoBehaviour:
   shader: {fileID: 4800000, guid: 17002aa670898b04c88c366f1d569619, type: 3}
   overrideCameraFOV: 0
   pattern: 0
-  layout: 4
+  layout: 2
   fieldOfView: 46.3
   onFrames: 1
   offFrames: 4
@@ -40,12 +40,12 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 2800000, guid: efdb1f63604f9c54d8bd2ab0fc06e40d, type: 2}
-    - {fileID: 2800000, guid: 3ca6cde813f7d934b86440109b514c92, type: 2}
-    - {fileID: 2800000, guid: cba505349da0c0f439c3fe78e96f2abe, type: 2}
-    - {fileID: 2800000, guid: 8ea37c99dae54ee499d595e5d82b306b, type: 2}
-    - {fileID: 2800000, guid: 89ccb84f61ca704468230b08d8b7b727, type: 2}
-    - {fileID: 2800000, guid: 1b72954880124fc4d887f79f093b75c8, type: 2}
+    - {fileID: 2800000, guid: ced49a41be9e2b543a19e272f3e1d6be, type: 2}
+    - {fileID: 2800000, guid: b8bc890e78c05a44dac63c6369b7395a, type: 2}
+    - {fileID: 2800000, guid: 65a23c0544a61d6429bfd341e7214476, type: 2}
+    - {fileID: 2800000, guid: 53fcda75d314f2f468ea6de54cb16041, type: 2}
+    - {fileID: 2800000, guid: 6cd4ea5c03cdca2409870ad860bc0863, type: 2}
+    - {fileID: 2800000, guid: 361b2d1873801ea41aaa49a0d8ca2cf4, type: 2}
     - {fileID: 2800000, guid: e46967e8e30643b4598b4b9dcd7109f0, type: 2}
     - {fileID: 2800000, guid: 152b9a3d4dbf13840b23332652efafb2, type: 2}
     - {fileID: 2800000, guid: 3b0a5cf6b0537884eb2a1ee6f1478c77, type: 2}

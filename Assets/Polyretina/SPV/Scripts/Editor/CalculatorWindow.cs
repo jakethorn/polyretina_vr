@@ -19,7 +19,7 @@ namespace LNE.ProstheticVision.UI
 		private float fieldOfView = 46.3f;
 		private int numElectrodes = 7738;
 
-		[MenuItem("LNE/Calculator", priority = WindowPriority.calculatorWindow)]
+		[MenuItem("Polyretina/Calculator", priority = WindowPriority.calculatorWindow)]
 		static void ShowWindow()
 		{
 			var window = GetWindow<CalculatorWindow>("Calculator");

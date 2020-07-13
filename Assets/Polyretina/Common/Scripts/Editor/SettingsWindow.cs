@@ -9,7 +9,7 @@ namespace LNE.UI
 	{
 		private string helpMessage;
 
-		[MenuItem("LNE/Settings", priority = WindowPriority.settingsWindow)]
+		[MenuItem("Polyretina/Settings", priority = WindowPriority.settingsWindow)]
 		static void ShowWindow()
 		{
 			var window = GetWindow<SettingsWindow>("Settings");

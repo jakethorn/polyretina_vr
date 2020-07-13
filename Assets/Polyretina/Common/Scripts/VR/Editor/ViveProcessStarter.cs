@@ -17,7 +17,7 @@ namespace LNE.VR.UI
 		private const string STEAM_VR_PATH = @"C:\Users\thorn\Desktop\SteamVR.url";
 		private const string SRANIPAL_PATH = @"C:\Users\Public\Desktop\SR_Runtime.lnk";
 
-		[MenuItem("LNE/Vive Pro Eye/Start All", priority = WindowPriority.viveStartAll)]
+		[MenuItem("Polyretina/Vive Pro Eye/Start All", priority = WindowPriority.viveStartAll)]
 		static void StartAll()
 		{
 			StartViveWireless();
@@ -37,25 +37,25 @@ namespace LNE.VR.UI
 			StartEyeTracking();
 		}
 
-		[MenuItem("LNE/Vive Pro Eye/Start Vive Wireless", priority = WindowPriority.viveStartWireless)]
+		[MenuItem("Polyretina/Vive Pro Eye/Start Vive Wireless", priority = WindowPriority.viveStartWireless)]
 		static void StartViveWireless()
 		{
 			StartProcess(WIRELESS, WIRELESS_PATH, true, "Vive Wireless is already running.");
 		}
 
-		[MenuItem("LNE/Vive Pro Eye/Start Steam", priority = WindowPriority.viveStartSteam)]
+		[MenuItem("Polyretina/Vive Pro Eye/Start Steam", priority = WindowPriority.viveStartSteam)]
 		static void StartSteam()
 		{
 			StartProcess(STEAM, STEAM_PATH, true, "Steam is already running.");
 		}
 
-		[MenuItem("LNE/Vive Pro Eye/Start SteamVR", priority = WindowPriority.viveStartSteamVR)]
+		[MenuItem("Polyretina/Vive Pro Eye/Start SteamVR", priority = WindowPriority.viveStartSteamVR)]
 		static void StartSteamVR()
 		{
 			StartProcess(STEAM_VR, STEAM_VR_PATH, true, "SteamVR is already running.");
 		}
 
-		[MenuItem("LNE/Vive Pro Eye/Start Eye Tracking", priority = WindowPriority.viveStartEyeTracking)]
+		[MenuItem("Polyretina/Vive Pro Eye/Start Eye Tracking", priority = WindowPriority.viveStartEyeTracking)]
 		static void StartEyeTracking()
 		{
 			StartProcess(SRANIPAL, SRANIPAL_PATH, true, "Eye Tracking is already running.");

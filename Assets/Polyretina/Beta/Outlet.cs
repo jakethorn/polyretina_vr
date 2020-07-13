@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+﻿#pragma warning disable 649
 
+using UnityEngine;
 using LSL;
 
 namespace LNE

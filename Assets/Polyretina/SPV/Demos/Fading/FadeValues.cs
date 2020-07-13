@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿#pragma warning disable 649
 
 using LNE.ProstheticVision;
+using UnityEngine;
 
 public class FadeValues : MonoBehaviour
 {

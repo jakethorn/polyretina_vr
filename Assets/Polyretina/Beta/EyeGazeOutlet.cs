@@ -1,14 +1,12 @@
-﻿using UnityEngine;
+﻿#pragma warning disable 649
 
+using UnityEngine;
 using LSL;
-using Assets.LSL4Unity.Scripts;
 
 namespace LNE
 {
 	using ProstheticVision;
-	using System;
-	using UnityEditor;
-
+	
 	public class EyeGazeOutlet : Outlet<float>
 	{
 		[Space]

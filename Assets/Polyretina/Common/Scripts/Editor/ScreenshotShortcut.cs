@@ -9,7 +9,7 @@ namespace LNE.UI
 
 	public class ScreenshotShortcut
 	{
-		[MenuItem("LNE/Screenshot &p", priority = WindowPriority.screenshot)]
+		[MenuItem("Polyretina/Screenshot &p", priority = WindowPriority.screenshot)]
 		static void Screenshot()
 		{
 			if (Application.isPlaying == false)

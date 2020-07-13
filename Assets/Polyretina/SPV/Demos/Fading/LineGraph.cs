@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#pragma warning disable 649
+
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LNE.ProstheticVision.Fading

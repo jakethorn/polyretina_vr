@@ -7,6 +7,7 @@ namespace LNE.Studies.StreetCrossing
 {
 	public class JsonToCSVConverter
 	{
+		/*
 		[MenuItem("S4/Test Data")]
 		static void TestData()
 		{
@@ -46,7 +47,7 @@ namespace LNE.Studies.StreetCrossing
 				JsonToCSV_All(dir);
 			}
 		}
-
+		*/
 		public static void JsonToCSV(string jsonPath)
 		{
 			JsonToCSV(jsonPath, jsonPath.Replace(".json", ".csv"));

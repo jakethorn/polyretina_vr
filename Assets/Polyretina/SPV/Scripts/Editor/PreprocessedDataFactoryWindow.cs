@@ -22,7 +22,7 @@ namespace LNE.ProstheticVision.UI
 		private ThreadGroup threadGroup;
 		private DateTime startTime;
 
-		[MenuItem("LNE/Preprocess Data", priority = WindowPriority.preprocessedDataFactoryWindow)]
+		[MenuItem("Polyretina/Preprocess Data", priority = WindowPriority.preprocessedDataFactoryWindow)]
 		static void ShowWindow()
 		{
 			GetWindow<PreprocessedDataFactoryWindow>("Preprocess Data").Show();

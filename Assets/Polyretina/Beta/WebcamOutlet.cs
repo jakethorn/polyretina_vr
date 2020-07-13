@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿#pragma warning disable 649
 
-using Assets.LSL4Unity.Scripts;
+using UnityEngine;
 using LSL;
 
 namespace LNE
