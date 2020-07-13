@@ -75,8 +75,8 @@ crashlytics-build.properties
 #
 
 # Ignore proprocessed data textures
-**/Preprocessed Data/
-**/Preprocessed Data.meta
+**/Preprocessed Data/v3/
+**/Preprocessed Data/v3.meta
 
 # Auxiliary folders
 /[Aa]ssets/LSL4Unity/

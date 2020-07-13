@@ -1,24 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32db2de5366d1e349934ca5ff4db1fb1, type: 3}
-  m_Name: Depth Based
-  m_EditorClassIdentifier: 
-  on: 1
-  foldout: 1
-  original: {fileID: 0}
-  shader: {fileID: 4800000, guid: 108985eca07ae094f8f60542bef2cdac, type: 3}
-  sensitivity: 0
-  contrast: 1
-  brightness: 0
-  saturation: 2
-  thickness: 0
-  threshold: 0.1
+version https://git-lfs.github.com/spec/v1
+oid sha256:150042e62928ff50f71db693fc1adcb8bee4863fcac570bda71652044d97f8e0
+size 641
