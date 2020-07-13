@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417222fcc31691b49973e39957889e21, type: 3}
+  m_Name: Fading Test
+  m_EditorClassIdentifier: 
+  on: 1
+  foldout: 1
+  original: {fileID: 11400000}
+  headset: 1
+  targetEye: 2
+  shader: {fileID: 4800000, guid: 17002aa670898b04c88c366f1d569619, type: 3}
+  overrideCameraFOV: 0
+  pattern: 0
+  layout: 4
+  fieldOfView: 120
+  onFrames: 1
+  offFrames: 4
+  luminanceLevels: 2
+  brightness: 1
+  brokenChance: 0
+  sizeVariance: 0
+  intensityVariance: 0
+  tailQuality: 2
+  tailLength: 0
+  useFading: 1
+  epiretinalData:
+    data:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 2800000, guid: efdb1f63604f9c54d8bd2ab0fc06e40d, type: 2}
+    - {fileID: 2800000, guid: 3ca6cde813f7d934b86440109b514c92, type: 2}
+    - {fileID: 2800000, guid: cba505349da0c0f439c3fe78e96f2abe, type: 2}
+    - {fileID: 2800000, guid: 8ea37c99dae54ee499d595e5d82b306b, type: 2}
+    - {fileID: 2800000, guid: 89ccb84f61ca704468230b08d8b7b727, type: 2}
+    - {fileID: 2800000, guid: 1b72954880124fc4d887f79f093b75c8, type: 2}
+    - {fileID: 2800000, guid: e46967e8e30643b4598b4b9dcd7109f0, type: 2}
+    - {fileID: 2800000, guid: 152b9a3d4dbf13840b23332652efafb2, type: 2}
+    - {fileID: 2800000, guid: 3b0a5cf6b0537884eb2a1ee6f1478c77, type: 2}
+    - {fileID: 2800000, guid: 765b577f3bafce74bb32fd27a0af2ad8, type: 2}
+    - {fileID: 2800000, guid: 3ce419deb7eac0244a92dcfc252d265a, type: 2}
+    - {fileID: 2800000, guid: d5279e8a515840740bd1545b37327b15, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    headsetFoldout: 0001010000
+    patternFoldout: 0101010101
+  eyeGazeSource: 0
+  outlineDevice: 1
