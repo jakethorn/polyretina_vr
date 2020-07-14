@@ -332,6 +332,20 @@ namespace LNE.ArrayExts
 			return that.Converge(false, (e, result) => result || e.Equals(value));
 		}
 
+		/// <summary>
+		/// Analogous to Substring
+		/// </summary>
+		public static T[] Subarray<T>(this T[] that, int startIndex, int length)
+		{
+			var result = new T[length];
+			for (int i = 0; i < length; i++)
+			{
+				result[i] = that[startIndex + i];
+			}
+
+			return result;
+		}
+
 		/*
 		 * Organise
 		 */

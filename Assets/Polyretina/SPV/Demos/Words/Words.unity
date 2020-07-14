@@ -193,6 +193,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2396437630155724521, guid: d9c7b8834ea9126409baad6dd77061f4,
+        type: 3}
+      propertyPath: _externalProcessor
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2396437630155724533, guid: d9c7b8834ea9126409baad6dd77061f4,
         type: 3}
       propertyPath: m_Name

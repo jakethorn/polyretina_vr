@@ -42,7 +42,7 @@ namespace LNE.ProstheticVision
 		{
 			switch (layout)
 			{
-				case ElectrodeLayout._40x60: return new[] { 40f * (58.4f / 60f), 58.3f };
+				case ElectrodeLayout._40x60: return new[] { 40f * (58.3f / 60f), 58.3f };
 				case ElectrodeLayout._60x90: return new[] { 60f * (87.5f / 90f), 87.5f };
 				case ElectrodeLayout._80x120: return new[] { 80f * (116.8f / 120f), 116.8f };
 				case ElectrodeLayout._100x150: return new[] { 100f * ( 136f / 150f), 136f };
