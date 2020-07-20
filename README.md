@@ -32,12 +32,12 @@ To add prosthetic vision to a Unity scene, you only need to add the Prosthesis c
   
 The external processor and implant can be configured directly from the component, but know that these changes will also be reflected in the original files.  
   
-You can view the original files by clicking the "Select" button at the bottom of either the external processor or the implant windows.
+You can view the original files by clicking the "Select" button at the bottom of either the external processor or the implant configuration windows.
 
 ## Using your own prosthesis design
 
 1. Add a value to the ElectrodePattern enum (Assets/Polyretina/SPV/Scripts/ElectrodePattern.cs) to represent your design.
-2. Add a method to the ElectrodePatternExtensions class (same file) that returns the x, y positions (um) of each electrode in your design. See Polyretina(ElectrodeLayout layout, float fov) for an example.
+2. Add a method to the ElectrodePatternExtensions class (same file) that returns the x, y positions (μm) of each electrode in your design. See Polyretina(ElectrodeLayout layout, float fov) for an example.
 3. Add a value to the ElectrodeLayout enum (Assets/Polyretina/SPV/Scripts/ElectrodeLayout.cs) to represent the diameter and pitch of your design.
 4. Add cases to the switch statements in the methods ToValue() and ToAnatomicalValue() that return the diameter and pitch of the electrodes in your design.
    - If unsure, then have the ToAnatomicalValue() method return the same values as the ToValue() method.
