@@ -32,7 +32,7 @@ namespace LNE.ProstheticVision.UI
 		{
 			_dataType = DataType.Phosphene;
 			_headset = HeadsetModel.VivePro;
-			_pattern = ElectrodePattern.Polyretina2019;
+			_pattern = ElectrodePattern.POLYRETINA;
 			_layout = ElectrodeLayout._80x150;
 			_path = "Assets/";
 			_gpuAccel = true;

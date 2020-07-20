@@ -16,11 +16,11 @@ namespace LNE.ProstheticVision
 		[Header("Image Processing")]
 		public HeadsetModel headset = HeadsetModel.VivePro;
 		public StereoTargetEyeMask targetEye = StereoTargetEyeMask.Right;
-		public Shader shader = null;
 		public bool overrideCameraFOV = true;
+		public bool overrideRefreshRate = true;
 
 		[Header("Model")]
-		public ElectrodePattern pattern = ElectrodePattern.Polyretina2019;
+		public ElectrodePattern pattern = ElectrodePattern.POLYRETINA;
 		public ElectrodeLayout layout = ElectrodeLayout._80x150;
 		public float fieldOfView =	46.3f;
 		public int onFrames = 1;
@@ -45,32 +45,30 @@ namespace LNE.ProstheticVision
 		[Range(0, 3)]
 		public float tailLength = 2;
 
-		// new >>
 		[Header("Fading")]
 		public bool useFading;
-		// new >>
 
 		[Header("Preprocessed Data")]
 		public EpiretinalData epiretinalData;
 
-		[Header("Debugging")]
+		[Header("Eye Tracking")]
 		public EyeGaze.Source eyeGazeSource = EyeGaze.Source.EyeTracking;
+
+		[Header("Debugging")]
 		public bool outlineDevice = false;
 
 		/*
 		 * Private fields
 		 */
 
-		private HeadsetModel lastHeadset;
-		private ElectrodePattern lastPattern;
-		private ElectrodeLayout lastLayout;
-		private Material material;
-
-		// new >>
 		private DoubleBufferedRenderTexture fadeRT;
 		private Material phosMRT;
 		private Material tailBlr;
-		// new >>
+
+		// used to detect changes in these enums in the update function to efficiently upload texture data to the GPU
+		private HeadsetModel lastHeadset;
+		private ElectrodePattern lastPattern;
+		private ElectrodeLayout lastLayout;
 
 		/*
 		 * Private properties
@@ -81,9 +79,7 @@ namespace LNE.ProstheticVision
 		// Until we find a headset with a 100Hz+ refresh rate, just treat each frame as 10ms (although its not)
 		public bool Pulse => Time.frameCount % (onFrames + offFrames) < onFrames;
 
-		// new >>
 		public DoubleBufferedRenderTexture FadeRT => fadeRT;
-		// new >>
 
 		/*
 		 * Inherited methods
@@ -91,203 +87,42 @@ namespace LNE.ProstheticVision
 
 		public override void Start()
 		{
-			if (shader == null && material == null)
+			// load shaders
+			phosMRT = new Material(Shader.Find("LNE/Phospherisation (MRT)"));
+			tailBlr = new Material(Shader.Find("LNE/Tail Distortion (w/ Blur)"));
+
+			if (phosMRT == null || tailBlr == null)
 			{
-				Debug.LogError($"{name} does not have a shader.");
+				Debug.LogError($"{name} does not have a material.");
 				return;
+			}
+
+			// upload electrode/axon textures to the GPU
+			phosMRT.SetTexture(SP.electrodeTexture, epiretinalData.GetPhospheneTexture(headset, pattern, layout));
+			tailBlr.SetTexture(SP.axonTexture, epiretinalData.GetAxonTexture(headset));
+
+			// create texture for the fading data
+			fadeRT = new DoubleBufferedRenderTexture(headset.GetWidth(), headset.GetHeight());
+			fadeRT.Initialise(new Color(1, .5f, 0, 1));
+
+			// overrides
+			if (overrideCameraFOV)
+			{
+				Prosthesis.Instance.Camera.fieldOfView = headset.GetFieldOfView(Axis.Vertical);
+			}
+
+			if (overrideRefreshRate)
+			{
+				Application.targetFrameRate = headset.GetRefreshRate();
 			}
 
 			// cache texture-related variables
 			lastHeadset = headset;
 			lastPattern = pattern;
 			lastLayout = layout;
-
-			// material
-			material = new Material(shader);
-
-			// phosphene texture
-			material.SetTexture(SP.electrodeTexture, epiretinalData.GetPhospheneTexture(headset, pattern, layout));
-
-			// axon texture
-			material.SetTexture(SP.axonTexture, epiretinalData.GetAxonTexture(headset));
-
-			if (overrideCameraFOV)
-			{
-				Prosthesis.Instance.Camera.fieldOfView = headset.GetFieldOfView(Axis.Vertical);
-			}
-
-			// new >>
-			fadeRT = new DoubleBufferedRenderTexture(headset.GetWidth(), headset.GetHeight());
-			fadeRT.Initialise(new Color(1, 0, 0, 1));
-
-			phosMRT = new Material(Shader.Find("LNE/Phospherisation (MRT)"));
-			tailBlr = new Material(Shader.Find("LNE/Tail Distortion (w/ Blur)"));
-
-			phosMRT.SetTexture(SP.electrodeTexture, epiretinalData.GetPhospheneTexture(headset, pattern, layout));
-			tailBlr.SetTexture(SP.axonTexture, epiretinalData.GetAxonTexture(headset));
-			// new >>
-
-			// new >>
-			// fading doesn't start immediately, this is a quick fix
-			brightness = 0;
-			Threading.CallbackManager.InvokeOnce(1, () => { brightness = 1; });
-			// new >>
 		}
 
 		public override void Update()
-		{
-			// new >>
-			if (useFading)
-			{
-				Update_MRT();
-				return;
-			}
-			// new >>
-
-			if (material == null)
-			{
-				Debug.LogError($"{name} does not have a material.");
-				return;
-			}
-
-			if (headset != lastHeadset && overrideCameraFOV)
-			{
-				Prosthesis.Instance.Camera.fieldOfView = headset.GetFieldOfView(Axis.Vertical);
-			}
-
-			/*
-			 * Set shader propertes
-			 */
-
-			//
-			// textures are only performed when necessary
-			//
-
-			// axon texture
-			if (headset != lastHeadset)
-			{
-				material.SetTexture(SP.axonTexture, epiretinalData.GetAxonTexture(headset));
-			}
-
-			// phosphene texture
-			if (headset != lastHeadset || pattern != lastPattern || layout != lastLayout)
-			{
-				material.SetTexture(SP.electrodeTexture, epiretinalData.GetPhospheneTexture(headset, pattern, layout));
-
-				lastHeadset = headset;
-				lastPattern = pattern;
-				lastLayout = layout;
-			}
-
-			//
-			// everything else is updated every frame
-			// there is already per-frame data that needs to be uploaded to graphics card anyway (e.g., eye gaze), 
-			//	so adding a few more floats probably isn't a big performance hit (probably, definitely not tested)
-			//
-
-			// headset diameter
-			material.SetVector(SP.headsetDiameter, headset.GetRetinalDiameter());
-
-			// electrode radius
-			material.SetFloat(SP.electrodeRadius, layout.GetRadius(LayoutUsage.Theoretical));
-
-			// implant radius
-			var implantRadius = CoordinateSystem.FovToRetinalRadius(fieldOfView);
-			material.SetFloat(SP.polyretinaRadius, implantRadius);
-
-			// pulse
-			material.SetInt(SP.pulse, Pulse ? 1 : 0);
-
-			// levels
-			material.SetInt(SP.luminanceLevels, luminanceLevels);
-
-			// brightness
-			material.SetFloat(SP.brightness, brightness);
-
-			// variance
-			material.SetFloat(SP.sizeVariance, sizeVariance);
-			material.SetFloat(SP.intensityVariance, intensityVariance);
-			material.SetFloat(SP.brokenChance, brokenChance);
-
-			// decay constant
-			material.SetFloat(SP.decayConst, tailLength);
-
-			// eye gaze
-			material.SetVector(SP.eyeGaze, EyeGaze.Get(eyeGazeSource, headset));
-
-			UpdateKeyword("RT_TARGET", Prosthesis.Instance.Camera.targetTexture != null);
-			UpdateKeyword("OUTLINE", outlineDevice);
-			UpdateTailQuality();
-		}
-
-		public override void GetDimensions(out int width, out int height)
-		{
-			width = headset.GetWidth();
-			height = headset.GetHeight();
-		}
-
-		public override void OnRenderImage(Texture source, RenderTexture destination)
-		{
-			// new >>
-			if (useFading)
-			{
-				OnRenderImage_MRT(source, destination);
-				return;
-			}
-			// new >>
-
-			if (material == null)
-			{
-				Debug.LogError($"{name} does not have a material.");
-				Graphics.Blit(source, destination);
-				return;
-			}
-
-			if (on)
-			{
-				Graphics.Blit(source, destination, material);
-			}
-			else
-			{
-				Graphics.Blit(source, destination);
-			}
-		}
-
-		private void UpdateKeyword(string keyword, bool condition)
-		{
-			if (condition && !material.IsKeywordEnabled(keyword))
-			{
-				material.EnableKeyword(keyword);
-			}
-			else if (!condition && material.IsKeywordEnabled(keyword))
-			{
-				material.DisableKeyword(keyword);
-			}
-		}
-
-		private void UpdateTailQuality()
-		{
-			if (tailQuality == Strength.High && material.IsKeywordEnabled("HIGH_QUALITY") == false)
-			{
-				material.EnableKeyword("HIGH_QUALITY");
-				material.DisableKeyword("MEDIUM_QUALITY");
-				material.DisableKeyword("LOW_QUALITY");
-			}
-			else if (tailQuality == Strength.Medium && material.IsKeywordEnabled("MEDIUM_QUALITY") == false)
-			{
-				material.DisableKeyword("HIGH_QUALITY");
-				material.EnableKeyword("MEDIUM_QUALITY");
-				material.DisableKeyword("LOW_QUALITY");
-			}
-			else if (tailQuality == Strength.Low && material.IsKeywordEnabled("LOW_QUALITY") == false)
-			{
-				material.DisableKeyword("HIGH_QUALITY");
-				material.DisableKeyword("MEDIUM_QUALITY");
-				material.EnableKeyword("LOW_QUALITY");
-			}
-		}
-
-		private void Update_MRT()
 		{
 			if (phosMRT == null || tailBlr == null)
 			{
@@ -295,23 +130,30 @@ namespace LNE.ProstheticVision
 				return;
 			}
 
-			if (headset != lastHeadset && overrideCameraFOV)
-			{
-				Prosthesis.Instance.Camera.fieldOfView = headset.GetFieldOfView(Axis.Vertical);
-			}
-
 			/*
 			 * Set shader propertes
 			 */
 
 			//
-			// textures are only performed when necessary
+			// textures are only updated when necessary for efficiencies sake
 			//
 
 			// axon texture
 			if (headset != lastHeadset)
 			{
 				tailBlr.SetTexture(SP.axonTexture, epiretinalData.GetAxonTexture(headset));
+
+				if (overrideCameraFOV)
+				{
+					Prosthesis.Instance.Camera.fieldOfView = headset.GetFieldOfView(Axis.Vertical);
+				}
+
+				if (overrideRefreshRate)
+				{
+					Application.targetFrameRate = headset.GetRefreshRate();
+				}
+
+				lastHeadset = headset;
 			}
 
 			// phosphene texture
@@ -326,7 +168,7 @@ namespace LNE.ProstheticVision
 
 			//
 			// everything else is updated every frame
-			// there is already per-frame data that needs to be uploaded to graphics card anyway (e.g., eye gaze), 
+			// there is already per-frame data that needs to be uploaded to graphics card anyway (e.g., eye gaze, pulse), 
 			//	so adding a few more floats probably isn't a big performance hit (probably, definitely not tested)
 			//
 
@@ -365,14 +207,23 @@ namespace LNE.ProstheticVision
 			phosMRT.SetVector(SP.eyeGaze, eyeGaze);
 			tailBlr.SetVector(SP.eyeGaze, eyeGaze);
 
-			UpdateKeyword_MRT("RT_TARGET", Prosthesis.Instance.Camera.targetTexture != null);
-			UpdateKeyword_MRT("OUTLINE", outlineDevice);
-			UpdateTailQuality_MRT();
+			// keywords
+			UpdateKeyword("USE_FADING", useFading);
+			UpdateKeyword("RT_TARGET", Prosthesis.Instance.Camera.targetTexture != null);
+			UpdateKeyword("OUTLINE", outlineDevice);
+			UpdateTailQuality();
 
+			// fading (can safely be uploaded every frame because it is just a RenderTexture pointer)
 			phosMRT.SetTexture(SP.fadeTexture, fadeRT.Back);
 		}
 
-		private void OnRenderImage_MRT(Texture source, RenderTexture destination)
+		public override void GetDimensions(out int width, out int height)
+		{
+			width = headset.GetWidth();
+			height = headset.GetHeight();
+		}
+
+		public override void OnRenderImage(Texture source, RenderTexture destination)
 		{
 			if (phosMRT == null || tailBlr == null)
 			{
@@ -397,7 +248,7 @@ namespace LNE.ProstheticVision
 			}
 		}
 
-		private void UpdateKeyword_MRT(string keyword, bool condition)
+		private void UpdateKeyword(string keyword, bool condition)
 		{
 			if (condition && !phosMRT.IsKeywordEnabled(keyword))
 			{
@@ -418,7 +269,7 @@ namespace LNE.ProstheticVision
 			}
 		}
 
-		private void UpdateTailQuality_MRT()
+		private void UpdateTailQuality()
 		{
 			if (tailQuality == Strength.High && tailBlr.IsKeywordEnabled("HIGH_QUALITY") == false)
 			{

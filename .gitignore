@@ -75,8 +75,6 @@ crashlytics-build.properties
 #
 
 # Ignore proprocessed data textures
-**/Preprocessed Data/v3/
-**/Preprocessed Data/v3.meta
 **/Preprocessed Data/v4/FHD 60/
 **/Preprocessed Data/v4/FHD 60.meta
 **/Preprocessed Data/v4/FOVE/

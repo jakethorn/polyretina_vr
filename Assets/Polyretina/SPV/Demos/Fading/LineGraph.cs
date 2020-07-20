@@ -99,7 +99,7 @@ namespace LNE.ProstheticVision.Fading
 		void Update()
 		{
 			// select graph camera
-			if (Input.GetMouseButtonDown(1))
+			if (Input.GetKey(KeyCode.LeftControl) && Input.GetMouseButtonDown(0))
 			{
 				UpdateCameraAspect();
 			}
@@ -205,7 +205,7 @@ namespace LNE.ProstheticVision.Fading
 		private void UpdateCameraAspect()
 		{
 			// .95f to allow some whitespace for min/max/current value texts
-			cameraAspect = Camera.main.aspect * .95f;
+			cameraAspect = GetComponentInChildren<Camera>().aspect * .95f;
 		}
 	}
 }

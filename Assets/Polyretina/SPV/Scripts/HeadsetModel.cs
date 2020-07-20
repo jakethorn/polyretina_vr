@@ -66,6 +66,22 @@ namespace LNE.ProstheticVision
 			}
 		}
 
+		public static int GetRefreshRate(this HeadsetModel headset)
+		{
+			switch (headset)
+			{
+				case HeadsetModel.Fove:		return 70;
+				case HeadsetModel.VivePro:	return 90;
+
+				case HeadsetModel.None60:	return 100;
+				case HeadsetModel.None120:	return 100;
+
+				case HeadsetModel.FHD60:	return 100;
+
+				default:					throw new Exception();
+			}
+		}
+
 		public static int GetWidth(this HeadsetModel headset)
 		{
 			return (int)headset.GetResolution().x;

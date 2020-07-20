@@ -14,7 +14,7 @@ namespace LNE.ProstheticVision.UI
 		private Vector2 pixel;
 		private Vector2 polar;
 
-		private ElectrodePattern pattern = ElectrodePattern.Polyretina2019;
+		private ElectrodePattern pattern = ElectrodePattern.POLYRETINA;
 		private ElectrodeLayout layout = ElectrodeLayout._100x150;
 		private float fieldOfView = 46.3f;
 		private int numElectrodes = 7738;

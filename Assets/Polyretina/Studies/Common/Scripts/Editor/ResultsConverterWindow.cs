@@ -6,6 +6,7 @@ namespace LNE.Studies
 {
 	public class ResultsConverterWindow : EditorWindow
 	{
+		/*
 		[MenuItem("Results/Convert", priority = 0)]
 		static void Convert()
 		{
@@ -25,7 +26,7 @@ namespace LNE.Studies
 				}
 			}
 		}
-
+		*/
 		private static void JsonToCsv()
 		{
 			var loadPath = EditorUtility.OpenFilePanel("Select Json data file...", Application.dataPath, "json");

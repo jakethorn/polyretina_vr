@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _refreshRate: 1
-  _savePath: C:/Users/thorn/Documents/Repositories/Postdoc/Unity/Polyretina_v2/Logs/FPS/
+  _savePath: C:/Users/thorn/Documents/
   _textPosition: {x: 0, y: 0}
   _textSize: 50
   _textColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

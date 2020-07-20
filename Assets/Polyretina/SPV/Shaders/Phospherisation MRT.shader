@@ -13,6 +13,7 @@ Shader "LNE/Phospherisation (MRT)"
 			#pragma vertex vert
 			#pragma fragment phos_w_fade_mrt
 
+			#pragma shader_feature_local USE_FADING
 			#pragma shader_feature_local OUTLINE
 
 			#define FIRST_PASS

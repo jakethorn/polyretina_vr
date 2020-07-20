@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9143424903779892936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9143424903779892939}
+  - component: {fileID: 9143424903779892938}
+  - component: {fileID: 9143424903779892941}
+  m_Layer: 0
+  m_Name: Object Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9143424903779892939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9143424903779892936}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9143424903779892938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9143424903779892936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a042ea46df972d14ab8e075de88abe9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 3153151880371574912, guid: a358c808b7cad7f4eb0e2fa97dd4e5af, type: 3}
+  - {fileID: 3384237239108838192, guid: d0a257bc607239542984a04fbebc2420, type: 3}
+  - {fileID: 7324646948897548978, guid: 12ec4d08b795fa44abb6c2e22785df52, type: 3}
+  - {fileID: 4565733987668386655, guid: 6e77a68b496e3164696ed802b3fa5ebc, type: 3}
+  - {fileID: 1705865278593510059, guid: 6f790f69840a61e4e93610ccd73b8303, type: 3}
+  - {fileID: 7933988119035406363, guid: 1afa8f070c3236b428a66763a62c53fc, type: 3}
+  - {fileID: 4085062119445442795, guid: 09e0c4cf0b86cd44a9e8a7e7852efbaa, type: 3}
+  - {fileID: 5453971311294237884, guid: a3623e5335fbf7b43a33391b9fd820e5, type: 3}
+  - {fileID: 3864428176225835094, guid: 65e527c89cd8be3478d05278324acb06, type: 3}
+  - {fileID: 123128220426649369, guid: 63ba3359322a0854e8c71ceaf8c07a49, type: 3}
+--- !u!114 &9143424903779892941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9143424903779892936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ca7b45cd611864e81cb3ca5d60dac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+  - trigger: 32
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 9143424903779892938}
+          m_MethodName: SpawnNextObject
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    foldout: 1
+  - trigger: 275
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 9143424903779892938}
+          m_MethodName: SpawnNextObject
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    foldout: 1
+  - trigger: 276
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 9143424903779892938}
+          m_MethodName: SpawnPrevObject
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    foldout: 1

@@ -5,7 +5,7 @@ namespace LNE.ProstheticVision
 {
 	public enum ElectrodePattern
 	{
-		Polyretina2019
+		POLYRETINA
 	}
 
 	public static class ElectrodePatternExtensions
@@ -14,12 +14,12 @@ namespace LNE.ProstheticVision
 		{
 			switch (that)
 			{
-				case ElectrodePattern.Polyretina2019:	return Polyretina2019(layout, fov);
-				default:								return null;
+				case ElectrodePattern.POLYRETINA:	return Polyretina(layout, fov);
+				default:							return null;
 			}
 		}
 		
-		private static Vector2[] Polyretina2019(ElectrodeLayout layout, float fov)
+		private static Vector2[] Polyretina(ElectrodeLayout layout, float fov)
 		{
 			var pattern = new List<Vector2>();
 			
