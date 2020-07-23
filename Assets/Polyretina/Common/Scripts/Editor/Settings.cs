@@ -63,12 +63,6 @@ namespace LNE
 			set => EditorPrefs.SetBool(nameof(SaveRuntimeChangesAutomatically), value);
 		}
 
-        public static float RefreshRate
-		{
-            get => EditorPrefs.GetFloat(nameof(RefreshRate), 90);
-            set => EditorPrefs.SetFloat(nameof(RefreshRate), value);
-		}
-
         /*
          * VRInput Support
          */ 

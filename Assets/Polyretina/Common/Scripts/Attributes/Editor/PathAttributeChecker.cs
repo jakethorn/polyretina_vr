@@ -20,6 +20,9 @@ namespace LNE.UI.Attributes
 			var monoBehaviours = UnityApp.FindObjectsOfTypeAll<MonoBehaviour>();
 			foreach (var behaviour in monoBehaviours)
 			{
+				if (behaviour == null)
+					continue;
+
 				var fields = behaviour.GetType()
 										.GetFields(BINDING_FLAGS)
 										.Where((f) => f.HasCustomAttribute<PathAttribute>());

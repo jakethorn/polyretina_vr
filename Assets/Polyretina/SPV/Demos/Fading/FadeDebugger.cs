@@ -10,12 +10,15 @@ public class FadeDebugger : MonoBehaviour
 	[SerializeField]
 	private Vector2 pixel;
 
+	[SerializeField]
+	private Vector2 pixelOffset;
+
 	private Texture2D readback;
 	private LineGraph graph;
 
 	public Vector2 Pixel
 	{
-		get => pixel;
+		get => pixel + pixelOffset;
 		set => pixel = value;
 	}
 
@@ -33,7 +36,7 @@ public class FadeDebugger : MonoBehaviour
 	{
 		if (Input.GetMouseButton(1))
 		{
-			pixel = Input.mousePosition;
+			Pixel = Input.mousePosition;
 		}
 	}
 
@@ -46,7 +49,7 @@ public class FadeDebugger : MonoBehaviour
 			var activeRT = RenderTexture.active;
 			RenderTexture.active = Implant.FadeRT.Back;
 
-			readback.ReadPixels(new Rect(pixel.x, Implant.headset.GetHeight() - pixel.y, 1, 1), 0, 0);
+			readback.ReadPixels(new Rect(Pixel.x, Implant.headset.GetHeight() - Pixel.y, 1, 1), 0, 0);
 			readback.Apply();
 
 			graph.Value = readback.GetPixel(0, 0).r;

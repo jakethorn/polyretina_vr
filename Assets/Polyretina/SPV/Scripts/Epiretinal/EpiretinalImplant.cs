@@ -120,6 +120,9 @@ namespace LNE.ProstheticVision
 			lastHeadset = headset;
 			lastPattern = pattern;
 			lastLayout = layout;
+
+			// initialise eye gaze tracking
+			EyeGaze.Initialise(eyeGazeSource, headset);
 		}
 
 		public override void Update()
@@ -215,6 +218,8 @@ namespace LNE.ProstheticVision
 
 			// fading (can safely be uploaded every frame because it is just a RenderTexture pointer)
 			phosMRT.SetTexture(SP.fadeTexture, fadeRT.Back);
+
+			phosMRT.SetVector("_eye_gaze_delta", EyeGaze.GetDelta(eyeGazeSource, headset));
 		}
 
 		public override void GetDimensions(out int width, out int height)

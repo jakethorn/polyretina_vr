@@ -15,6 +15,8 @@ namespace LNE.ProstheticVision
 #if VIVE_PRO_EYE
 		private static EyeData_v2 eyeData = new EyeData_v2();
 #endif
+
+		private static Vector2 lastPos;
 		private static Vector2 lastMousePos;
 
 		public static Vector2 VivePro
@@ -105,6 +107,22 @@ namespace LNE.ProstheticVision
 			}
 		}
 
+		public static Vector2 LastPosition
+		{
+			get => lastPos;
+			set => lastPos = value;
+		}
+
+		public static void Initialise(HeadsetModel headset)
+		{
+			LastPosition = Get(headset);
+		}
+
+		public static void Initialise(Source source, HeadsetModel headset = HeadsetModel.None60)
+		{
+			LastPosition = Get(source, headset);
+		}
+
 		public static Vector2 Get(HeadsetModel headset)
 		{
 			switch (headset)
@@ -124,6 +142,24 @@ namespace LNE.ProstheticVision
 				case Source.None:			return Vector2.zero;
 				default:					return Vector2.zero;
 			}
+		}
+
+		public static Vector2 GetDelta(HeadsetModel headset)
+		{
+			var position = Get(headset);
+			var delta = LastPosition - position;
+			LastPosition = position;
+
+			return delta;
+		}
+
+		public static Vector2 GetDelta(Source source, HeadsetModel headset = HeadsetModel.None60)
+		{
+			var position = Get(source, headset);
+			var delta = LastPosition - position;
+			LastPosition = position;
+
+			return delta;
 		}
 
 		public static float GetPupilDilation()

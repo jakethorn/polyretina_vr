@@ -41,14 +41,18 @@
 		return frac(sin(dot(float3(seed_x, seed_y, seed_z), float3(12.9898, 78.233, 45.5432))) * 43758.5453);
 	}
 	
-	void calc_luminance(float2 eye_uv, out bool is_electrode, out bool electrode_is_on, out float luminance)
+	void calc_luminance(float2 eye_uv, out bool is_electrode, out float2 electrode_pos, out bool electrode_is_on, out float luminance)
 	{
 		// electrode position
 		float4 data = tex2D(_electrode_tex, eye_uv);
-		float2 position = data.rg;
-		
+		float2 position_um = data.rg;
+		float2 position_px = retina_to_pixel(position_um, _headset_diameter) + _eye_gaze;
+
+		// electrode position (out param)
+		electrode_pos = position_px;
+
 		// input luminance
-		float3 input = tex2D(TEX, retina_to_pixel(position, _headset_diameter) + _eye_gaze).rgb;
+		float3 input = tex2D(TEX, position_px).rgb;
 		
 		// electrode size, intensity and if broken
 		float broken = step(data.b, _broken_chance);
@@ -56,8 +60,8 @@
 		float intensity = 1.0 - lerp(0.0, _intensity_variance, rand(data.b, data.a, _Time.y));
 
 		// distances
-		float distance_to_electrode = distance(pixel_to_retina(eye_uv, _headset_diameter), position);
-		float distance_to_fovea = length(position);
+		float distance_to_electrode = distance(pixel_to_retina(eye_uv, _headset_diameter), position_um);
+		float distance_to_fovea = length(position_um);
 		
 		// pixel is an electrode if... (out param)
 		is_electrode =	step(distance_to_electrode, _electrode_radius * size)			*	// inside an electrode
@@ -76,10 +80,11 @@
 	float calc_luminance(float2 eye_uv)
 	{
 		bool is_electrode;
+		float2 electrode_pos;
 		bool electrode_is_on;
 		float luminance;
 
-		calc_luminance(eye_uv, is_electrode, electrode_is_on, luminance);
+		calc_luminance(eye_uv, is_electrode, electrode_pos, electrode_is_on, luminance);
 		return luminance;
 	}
 
@@ -114,6 +119,8 @@
 
 	sampler2D _fade_tex;
 	
+	float2 _eye_gaze_delta;
+
 	/*
 	 * Constants
 	 */
@@ -125,7 +132,7 @@
 
 	static const float _recovery_time = 30;
 	static const float _recovery_exponent = 1.6;
-	static const float _recovery_threshold = .5;
+	static const float _recovery_threshold = .95;
 	
 	/*
 	 * Functions
@@ -260,16 +267,18 @@
 	{
 #ifdef GRAB_PASS
 		_eye_gaze.y = -_eye_gaze.y;
+		_eye_gaze_delta.y = -_eye_gaze_delta.y;
 #endif
 
 		float2 eye_uv = uv - _eye_gaze;
 		
 		bool is_electrode;
+		float2 electrode_pos;
 		bool electrode_is_on;
 		float luminance;
-		calc_luminance(eye_uv, is_electrode, electrode_is_on, luminance);
+		calc_luminance(eye_uv, is_electrode, electrode_pos, electrode_is_on, luminance);
 
-		float4 fade_data = tex2D(_fade_tex, uv);
+		float4 fade_data = tex2D(_fade_tex, electrode_pos + _eye_gaze_delta);
 
 #ifdef USE_FADING
 		luminance *= fade_data.r;				

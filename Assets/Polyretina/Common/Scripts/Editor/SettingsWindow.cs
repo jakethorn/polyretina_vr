@@ -74,12 +74,6 @@ namespace LNE.UI
 				helpMessage = "Save runtime changes made to ImageRenderers automatically.";
 			}
 
-			Settings.RefreshRate = UnityGUI.Float("Refresh Rate", Settings.RefreshRate);
-			if (UnityGUI.OnMouseHoverPrevious())
-			{
-				helpMessage = "Set runtime refresh rate for testing devices with specific pulse frequencies.";
-			}
-
 			UnityGUI.IndentLevel--;
 			UnityGUI.FlexibleSpace();
 			UnityGUI.HelpLabel(helpMessage, MessageType.Info);

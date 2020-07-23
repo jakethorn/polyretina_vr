@@ -349,15 +349,21 @@ namespace LNE.ProstheticVision.Fading
 		[ContextMenu("Set Relative Recovery")]
 		private void SetRelativeRecovery_Menu()
 		{
-			slowDecayRate = .0044f;
+			fastDecayRate = .175f;
+			slowDecayRate = .00167f;
+			_decayRate1 = 1;
+
 			_recoveryRate = 0;
-			_recoveryExponent = 1.8f;
+			_recoveryExponent = 1.667f;
 		}
 
 		[ContextMenu("Set Uniform Recovery")]
 		private void SetUniformRecovery_Menu()
 		{
-			slowDecayRate = .056f;
+			fastDecayRate = .3f;
+			slowDecayRate = .05575f;
+			_decayRate1 = 0;
+
 			_recoveryRate = 1;
 			_recoveryExponent = 1;
 		}

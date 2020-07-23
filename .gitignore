@@ -74,14 +74,6 @@ crashlytics-build.properties
 # Polyretina VR
 #
 
-# Ignore proprocessed data textures
-**/Preprocessed Data/v4/FHD 60/
-**/Preprocessed Data/v4/FHD 60.meta
-**/Preprocessed Data/v4/FOVE/
-**/Preprocessed Data/v4/FOVE.meta
-**/Preprocessed Data/v4/None 60/
-**/Preprocessed Data/v4/None 60.meta
-
 # Auxiliary folders
 /[Aa]ssets/LSL4Unity/
 /[Aa]ssets/LSL4Unity.meta

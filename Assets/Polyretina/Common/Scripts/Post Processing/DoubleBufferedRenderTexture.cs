@@ -22,6 +22,7 @@ namespace LNE.PostProcessing
 		 */
 
 		public RenderTexture Front => swapped ? second : first;
+
 		public RenderTexture Back => swapped ? first : second;
 
 		/*
@@ -89,15 +90,6 @@ namespace LNE.PostProcessing
 		public void Initialise(Texture texture)
 		{
 			var material = new Material(Shader.Find("Unlit/Texture"));
-			material.mainTexture = texture;
-
-			Initialise(material);
-		}
-
-		public void Initialise(Color colour, Texture texture)
-		{
-			var material = new Material(Shader.Find("LNE/Coloured Texture"));
-			material.color = colour;
 			material.mainTexture = texture;
 
 			Initialise(material);

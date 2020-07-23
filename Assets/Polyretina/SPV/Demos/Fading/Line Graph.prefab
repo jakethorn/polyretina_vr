@@ -290,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pixel: {x: 1015, y: 1131.5}
+  pixelOffset: {x: -3, y: 2}
 --- !u!1 &1740258590781505516
 GameObject:
   m_ObjectHideFlags: 0
