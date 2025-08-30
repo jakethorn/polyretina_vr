@@ -2,11 +2,10 @@
 
 This project simulates the artificial vision provided by a POLYRETINA epi-retinal prosthesis using Unity, C# and HLSL/Cg. Simulations can be viewed in real-time on either a computer screen or in virtual reality (using either a FOVE or VIVE Pro Eye head-mounted display).
 
-## Examples
+## Links
 
-![Kitchen](https://github.com/jakethorn/polyretina_vr/blob/main/Images/kitchen.png)
-![Street](https://github.com/jakethorn/polyretina_vr/blob/main/Images/street.png)
-
+[Project Overview](https://github.com/jakethorn/polyretina_vr/blob/main/Project%20Overview.pdf)  
+[Video Demonstration](https://youtu.be/uyKb91gg8po)
 
 ## Setup
 
@@ -81,3 +80,6 @@ External Processors/Implants are explained [here](https://github.com/lne-lab/pol
 4. Add the Prosthesis component to the Scene's camera (if not already done).
 5. Assign the asset as either the External Processor or Implant of the Prosthesis component.
 
+## Images
+![Kitchen](https://github.com/jakethorn/polyretina_vr/blob/main/Images/kitchen.png)
+![Street](https://github.com/jakethorn/polyretina_vr/blob/main/Images/street.png)
