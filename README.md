@@ -2,6 +2,12 @@
 
 This project simulates the artificial vision provided by a POLYRETINA epi-retinal prosthesis using Unity, C# and HLSL/Cg. Simulations can be viewed in real-time on either a computer screen or in virtual reality (using either a FOVE or VIVE Pro Eye head-mounted display).
 
+## Publications
+
+[Virtual reality simulation of epiretinal stimulation highlights the relevance of the visual angle in prosthetic vision](https://iopscience.iop.org/article/10.1088/1741-2552/abb5bc/meta) (2020)  
+[Virtual reality validation of naturalistic modulation strategies to counteract fading in retinal stimulation](https://iopscience.iop.org/article/10.1088/1741-2552/ac5a5c/meta) (2022)  
+[Wide visual angle enhances social interaction in a realistic virtual reality environment under simulated artificial vision](https://www.biorxiv.org/content/10.1101/2025.03.27.645647v1.abstract) (2025)  
+
 ## Links
 
 [Project Overview](https://github.com/jakethorn/polyretina_vr/blob/main/Project%20Overview.pdf)  
@@ -83,3 +89,4 @@ External Processors/Implants are explained [here](https://github.com/lne-lab/pol
 ## Images
 ![Kitchen](https://github.com/jakethorn/polyretina_vr/blob/main/Images/kitchen.png)
 ![Street](https://github.com/jakethorn/polyretina_vr/blob/main/Images/street.png)
+
